@@ -2,22 +2,22 @@ import os
 
 
 def copy_file(command: str) -> None:
-    parts = command.split()
+    command_parts = command.split()
 
-    # Перевіряємо, що команда має правильний формат: 'cp source target'
-    if len(parts) != 3 or parts[0] != "cp":
+    # Перевіряємо, що команда має правильний формат: "cp source target"
+    if len(command_parts) != 3 or command_parts[0] != "cp":
         return
 
-    source, target = parts[1], parts[2]
+    source_file, target_file = command_parts[1], command_parts[2]
 
     # Якщо джерело і цільове ім'я однакові, нічого не робимо
-    if source == target:
+    if source_file == target_file:
         return
 
     # Перевіряємо, чи існує вихідний файл
-    if not os.path.exists(source):
+    if not os.path.exists(source_file):
         return
 
     # Копіюємо файл
-    with open(source, "r") as file_in, open(target, "w") as file_out:
-        file_out.write(file_in.read())
+    with open(source_file, "r") as source, open(target_file, "w") as target:
+        target.write(source.read())
